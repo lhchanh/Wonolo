@@ -1,0 +1,26 @@
+.row
+  .col-md-12
+    h3 Search photos around any location
+    .map
+    .search-box
+      form.form-inline
+        .form-group
+          label.text-right Enter a City:
+          input.form-control type="input"
+        button.btn Find Photos
+    .search-box
+      form.form-horizontal
+        .form-group
+          label.col-sm-4.control-label Latitude:
+          .col-sm-4
+            input.form-control type="text"
+        .form-group
+          label.col-sm-4.control-label Longitude:
+          .col-sm-4
+            input.form-control type="text"
+    .result-box
+      .row
+        - @instagram.each do |instagram|
+          .col-md-3
+            = image_tag instagram.images.standard_resolution.url , class: 'img-thumbnail'
+

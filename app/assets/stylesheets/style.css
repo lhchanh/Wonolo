@@ -1,0 +1,36 @@
+.map{
+  border: 1px solid #ccc;
+  min-height: 450px;
+}
+
+.search-box{
+  margin: 30px auto;
+  text-align: center;
+}
+
+.search-box input{
+  margin: 0 10px;
+  min-width: 300px;
+}
+.result-box {
+  margin-bottom: 40px;
+}
+.result-box img{
+  margin: 15px auto;
+}
+
+header{
+  background: #ffdc00;
+}
+
+header a, header a:hover{
+  text-decoration: none;
+  color: #231f20;
+}
+
+footer{
+  height: 60px;
+  background: #232323;
+  color: #a8a8a8;
+  text-align: center;
+}
