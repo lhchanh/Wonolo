@@ -8,15 +8,11 @@
   text-align: center;
 }
 
-.search-box input{
-  margin: 0 10px;
-  min-width: 300px;
-}
 .result-box {
-  margin-bottom: 40px;
+  margin: 40px auto;
 }
 .result-box img{
-  margin: 15px auto;
+  margin: 25px auto;
 }
 
 header{
@@ -33,4 +29,48 @@ footer{
   background: #232323;
   color: #a8a8a8;
   text-align: center;
+}
+
+.error{
+  color: red;
+  font-weight: normal;
+  text-align: left;
+  width: 100%;
+}
+
+#panel {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  margin-left: -180px;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+}
+
+.photo-profile{
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  z-index: 10000;
+}
+
+.box-post:hover .user-name-profile{
+  display: block;
+}
+
+.user-name-profile{
+  position: absolute;
+  background: white;
+  top: 32px;
+  right: 15px;
+  z-index: 9999;
+  text-align: right;
+  opacity: 0.8;
+  padding: 5px 15px;
+  margin: 10px;
+  display: none;
 }

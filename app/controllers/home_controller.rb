@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    @instagram = instagram_service.search_posts
+    @instagrams = instagram_service.search_posts params
   end
 
   private

@@ -1,26 +1,35 @@
 .row
   .col-md-12
     h3 Search photos around any location
-    .map
-    .search-box
-      form.form-inline
-        .form-group
-          label.text-right Enter a City:
-          input.form-control type="input"
-        button.btn Find Photos
-    .search-box
-      form.form-horizontal
-        .form-group
-          label.col-sm-4.control-label Latitude:
-          .col-sm-4
-            input.form-control type="text"
-        .form-group
-          label.col-sm-4.control-label Longitude:
-          .col-sm-4
-            input.form-control type="text"
+    .row
+      .col-sm-8
+        #panel
+          input#address type="textbox" value="" placeholder="Enter a Address"
+          input onclick="getLatLngByAddress()" type="button" value="Geocode"
+
+        #map-canvas.map
+      .col-sm-4
+        .search-box
+          = form_tag '/',method: 'get', remote: true, class: 'form-horizontal', id: "searchForm" do
+            .form-group
+              label.col-sm-4.control-label Radius (km):
+              .col-sm-8
+                = text_field_tag :radius, '', placeholder: 'Please type radius in here', class: 'form-control'
+            .form-group
+              label.col-sm-4.control-label Latitude:
+              .col-sm-8
+                = text_field_tag :lat, '', placeholder: 'Latitude', class: 'form-control', id: 'latitude'
+            .form-group
+              label.col-sm-4.control-label Longitude:
+              .col-sm-8
+                = text_field_tag :lng, '', placeholder: 'Longitude', class: 'form-control', id: 'longitude'
+            .form-group
+              .col-sm-4
+              .col-sm-8
+                = submit_tag 'Find Photos' , class: 'btn pull-left'
+
     .result-box
-      .row
-        - @instagram.each do |instagram|
-          .col-md-3
-            = image_tag instagram.images.standard_resolution.url , class: 'img-thumbnail'
+      #instagram-result.row
+        - if @instagrams.length > 0
+          = render 'instagrams', :instagrams => @instagrams
 
