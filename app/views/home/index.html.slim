@@ -12,7 +12,7 @@
         .search-box
           = form_tag '/',method: 'get', remote: true, class: 'form-horizontal', id: "searchForm" do
             .form-group
-              label.col-sm-4.control-label Radius (km):
+              label.col-sm-4.control-label Radius (Km):
               .col-sm-8
                 = text_field_tag :radius, '', placeholder: 'Please type radius in here', class: 'form-control'
             .form-group

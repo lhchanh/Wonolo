@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require main
+//= require constants
 //= require validation
 //= require jquery.validate.min
+//= require moment
 //= require js-routes
 //= require_tree .

@@ -4,7 +4,7 @@ marker = null
 
 @initializeGoogleMaps = ->
   geocoder = new google.maps.Geocoder()
-  latlng = new google.maps.LatLng(-34.397, 150.644)
+  latlng = new google.maps.LatLng(10.8230989, 106.6296638)
   mapOptions =
     center: latlng
     zoom: 8
@@ -51,3 +51,9 @@ marker = null
 updateLatLng = (lat, lng)->
   $('#latitude').val(lat)
   $('#longitude').val(lng)
+
+@formatTime = ->
+  $('.time').each (i, e) ->
+    time = moment(parseInt($(e).attr('datetime'))*1000).fromNow()
+    $(e).html '<span>' + time + '</span>'
+  return
