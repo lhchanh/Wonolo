@@ -1,9 +1,10 @@
 - instagrams.each do |instagram|
   .col-md-3
     .box-post media-id="#{instagram.id}"
-      .user-profile
-        .user-name-profile= instagram.user.username
-        = image_tag instagram.user.profile_picture , class: 'img-circle photo-profile'
+      = link_to instagram_profile(instagram.user.username), target: '_blank' do
+        .user-profile
+          .user-name-profile= instagram.user.username
+          = image_tag instagram.user.profile_picture , class: 'img-circle photo-profile'
       .thum-post
         = image_tag instagram.images.standard_resolution.url , class: 'img-thumbnail'
         .infoTop.time datetime="#{instagram.created_time}"
