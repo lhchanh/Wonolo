@@ -3,3 +3,5 @@
     .user-name-profile= instagram.user.username
     = image_tag instagram.images.standard_resolution.url , class: 'img-thumbnail'
     = image_tag instagram.user.profile_picture , class: 'img-circle photo-profile'
+.clearfix
+= paginate instagrams, remote: true

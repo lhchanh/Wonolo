@@ -5,10 +5,9 @@ class InstagramService < BaseService
     lng = params_search[:lng]
     distance = params_search[:radius].to_i*1000 || RADIUS
     instagrams = if lat && lng
-      instagrams= Instagram.client(access_token: ACCESS_TOKEN_INSTAGRAM)
-      instagrams=instagrams.media_search(lat,lng, {count: 10})
-      p instagrams
-      instagrams
+      instagrams = Instagram.client(access_token: ACCESS_TOKEN_INSTAGRAM)
+      instagrams = instagrams.media_search(lat,lng, {distance: distance})
+      instagrams = Kaminari.paginate_array(instagrams).page(params_search[:page]).per(PER_PAGE)
     else
       []
     end
