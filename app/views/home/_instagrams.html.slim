@@ -1,13 +1,4 @@
 - instagrams.each do |instagram|
-  .col-md-3.box-post
-    .user-name-profile= instagram.user.username
-    = image_tag instagram.images.low_resolution.url , class: 'img-thumbnail'
-    = image_tag instagram.user.profile_picture , class: 'img-circle photo-profile'
-    .time datetime="#{instagram.created_time}"
-    .like-heart= instagram.likes.count
-.clearfix
-
-- instagrams.each do |instagram|
   .col-md-3
     .box-post
       .infoTop.time datetime="#{instagram.created_time}"
@@ -15,7 +6,8 @@
       = image_tag instagram.images.standard_resolution.url , class: 'img-thumbnail'
       = image_tag instagram.user.profile_picture , class: 'img-circle photo-profile'
       .infoBot
-        span.pull-left.comment= instagram.likes.count
+        span.pull-left.comment= instagram.comments.count
         span.pull-right.like-heart= instagram.likes.count
+.clearfix
 
 = paginate instagrams, remote: true
