@@ -11,9 +11,6 @@
 .result-box {
   margin: 40px auto;
 }
-.result-box img{
-  margin: 25px auto;
-}
 
 header{
   background: #ffdc00;
@@ -49,28 +46,150 @@ footer{
   border: 1px solid #999;
 }
 
+.box-post {
+  position: relative;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
 .photo-profile{
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   position: absolute;
-  top: -20px;
-  left: -10px;
-  z-index: 10000;
+  top: -22px;
+  left: -22px;
+  z-index: 1000;
+  border: 1px solid #eee;
+  box-shadow: 0px 0px 1px #383838;
+  transition: all .3s ease-in-out;
 }
 
-.box-post:hover .user-name-profile{
+.photo-profile:hover{
+  box-shadow: 0px 0px 5px #383838;
+}
+
+.user-name-profile {
+  position: absolute;
+  min-width: 100px;
+  top: -10px;
+  left: 32px;
+  display: inline-block;
+  background-color: #383838;
+  height: 25px;
+  border-radius: 3px;
+  padding: 3px 10px;
+  color: #fff;
+  font-size: 12px;
+  visibility: hidden;
+  transform: transformX(-100px);
+  transition: all .3s ease-in-out;
+}
+
+.user-profile:hover .user-name-profile  {
+ visibility: visible;
+ transform: transformX(0px);
+}
+
+.user-name-profile:before {
+  content: "";
+  position: absolute;
   display: block;
+  top: 8px;
+  left: -9px;
+  height: 5px;
+  width: 5px;
+  border: 5px solid;
+  border-color: transparent #383838 transparent transparent;
 }
 
-.user-name-profile{
+
+.infoTop, .infoBot {
   position: absolute;
-  background: white;
-  top: 32px;
-  right: 15px;
-  z-index: 9999;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: rgba(255,255,255,.95);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0 15px;
+  /*display: none;*/
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -ms-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.infoTop {
+  top: 0;
   text-align: right;
-  opacity: 0.8;
-  padding: 5px 15px;
-  margin: 10px;
-  display: none;
+  -webkit-transform: translateY(-40px);
+  -moz-transform: translateY(-40px);
+  -ms-transform: translateY(-40px);
+  transform: translateY(-40px);
+}
+
+.infoBot {
+  bottom: 0;
+  -webkit-transform: translateY(40px);
+  -moz-transform: translateY(40px);
+  -ms-transform: translateY(40px);
+  transform: translateY(40px);
+}
+
+.thum-post:hover .infoTop,
+.thum-post:hover .infoBot {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(1px);
+  -moz-transform: translateY(1px);
+  -ms-transform: translateY(1px);
+  transform: translateY(1px);
+}
+
+.like-heart::after {
+  content: "\f08a";
+  font-family: FontAwesome;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.comment::before {
+  content: "\f0e5";
+  font-family: FontAwesome;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.infoTop span:before {
+  content: "\f041";
+  font-family: FontAwesome;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.pagination {
+  width: 100%;
+  margin-left: 15px;
+}
+
+.pagination li {
+  margin-right: 5px;
+}
+
+.pagination li a {
+  border: none;
+  border-radius: 3px !important;
+  color: #383838;
+}
+
+.pagination li.active a {
+  background: #383838;
+  color: #FFDC00;
+}
+
+.modal-dialog{
+  background: white;
 }
