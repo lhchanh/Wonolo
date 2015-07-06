@@ -62,6 +62,12 @@ updateLatLng = (lat, lng)->
     $(e).html '<span>' + time + '</span>'
   return
 
+@updateDistance = ->
+  $('.distance-post').each (i, e) ->
+    distance = parseFloat($(e).attr('distance')).toFixed(2)
+    $(e).html '<span>' + distance + 'm </span>'
+  return
+
 @triggerModal = ->
   $('body').on 'click', '.box-post .img-thumbnail', ->
     $('.wrap-feed-detail').hide()
@@ -177,8 +183,8 @@ changePostDetail = ->
 
 @viewAllUsersLike = ->
   $('#view_like_all').on 'click', ->
-    # mediaID = $(this).attr('media-id')
-    # getUserLike(mediaID)
+    mediaID = $(this).attr('media-id')
+    getUserLike(mediaID)
     return
 
 getUserLike = (mediaID) ->

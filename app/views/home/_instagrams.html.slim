@@ -9,9 +9,13 @@
         = image_tag instagram.images.standard_resolution.url , class: 'img-thumbnail'
         .infoTop.time datetime="#{instagram.created_time}"
         .infoBot
-          span.pull-left.comment= instagram.comments.count
-          span.pull-right.like-heart= instagram.likes.count
+          span.pull-left.comment= instagram.comments[:count]
+          span.pull-right.like-heart= instagram.likes[:count]
+          .distance.distance-post distance="#{instagram.distance}"
+
         .type-post class="type-post-#{instagram.type}"
 
+
 .clearfix
-= paginate instagrams, remote: true
+.pull-right
+  = paginate instagrams, remote: true

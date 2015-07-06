@@ -212,7 +212,10 @@ footer {
     -ms-transform: translateY(1px);
     transform: translateY(1px);
 }
-
+.distance{
+  display: block;
+  text-align: center;
+}
 .thum-post:hover .type-post-video {
     display: block;
 }
