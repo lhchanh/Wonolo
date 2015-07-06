@@ -70,6 +70,7 @@ updateLatLng = (lat, lng)->
 
 getPostByMediaID = (mediaID) ->
   $('#feed-post').modal('show')
+  $('#feed-post').off 'shown.bs.modal'
   $('#feed-post').on 'shown.bs.modal', ->
     $.ajax
       url: Routes.get_post_path({media_id: mediaID})
