@@ -6,24 +6,24 @@ class InstagramService < BaseService
     distance = params_search[:radius].to_i*1000 || RADIUS
     return [] unless (lat && lng)
     medias = @client.media_search(lat,lng, {distance: distance})
-    medias = medias.each do |e|
-          distance = ''
-          while !distance.is_a? Numeric
-            begin
-              sleep 0.25
-              distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
-            rescue
-              # Fixed issue Usage Limits for Google Geocoding API
-              # 5 requests per second.
-              sleep 1
-              distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
-            end
-          end
-          e.distance = distance
-        end
-        .sort_by do |e|
-          e.distance
-        end
+    # medias = medias.each do |e|
+    #       distance = ''
+    #       while !distance.is_a? Numeric
+    #         begin
+    #           sleep 0.25
+    #           distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
+    #         rescue
+    #           # Fixed issue Usage Limits for Google Geocoding API
+    #           # 5 requests per second.
+    #           sleep 1
+    #           distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
+    #         end
+    #       end
+    #       e.distance = distance
+    #     end
+    #     .sort_by do |e|
+    #       e.distance
+    #     end
     Kaminari.paginate_array(medias).page(params_search[:page]).per(PER_PAGE)
   end
 
