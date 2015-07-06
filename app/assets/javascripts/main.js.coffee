@@ -83,12 +83,9 @@ getPostByMediaID = (mediaID) ->
         $('.loading').hide()
         $('.wrap-feed-detail').show()
         return
-
-        console.log respondData
       error: (error)->
         $('.loading').show()
         $('.wrap-feed-detail').hide()
-        console.log error
 
 appendLikeUser = (element, data)->
   element.html('')
