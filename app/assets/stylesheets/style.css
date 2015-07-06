@@ -1,3 +1,11 @@
+html, body {
+    height: 100%;
+}
+
+body > .container {
+    min-height: 100%;
+}
+
 input:focus {
     outline: none;
 }
@@ -7,7 +15,7 @@ h3.head {
 }
 
 .map {
-    min-height: 450px;
+    min-height: 400px;
 }
 
 .search-box {
@@ -16,7 +24,7 @@ h3.head {
 }
 
 .result-box {
-    margin: 40px auto;
+    margin: 100px auto;
 }
 
 header {
@@ -43,9 +51,8 @@ footer {
     width: 100%;
 }
 
-.wrap-map {}
 
-.wrap-map #panel {
+ #panel {
     display: block;
     content: "";
     background: #ddd;
@@ -53,52 +60,19 @@ footer {
     padding: 10px 15px;
 }
 
-.wrap-map #panel .dot {
-    position: relative;
-    background: #3C4E5A;
-    margin-top: 10px;
-}
-
-.wrap-map #panel .dot::after,
-.wrap-map #panel .dot::before {
-    content: "";
-    position: absolute;
-}
-
-.wrap-map #panel .dot::before {
-    background: #3887BE;
-    top: 0;
-    right: -20px;
-}
-
-.wrap-map #panel .dot::after {
-    background: #8A8ACB;
-    right: -37px;
-}
-
-.wrap-map #panel .dot,
-.wrap-map #panel .dot::after,
-.wrap-map #panel .dot::before {
-    height: 10px;
-    width: 10px;
-    border-radius: 10px;
-    display: inline-block;
-}
-
-.wrap-map #panel .input-group {
+#panel .input-group {
     background: #fff;
-    padding: 5px 7px;
     border-radius: 3px;
 }
 
-.wrap-map #panel input[type="textbox"] {
+#panel input[type="text"] {
     width: 100%;
     border: none;
     background: none;
     box-shadow: none;
 }
 
-.wrap-map #panel button {
+#panel button {
     font-size: 15px;
     background: none;
     border: none;
@@ -212,6 +186,23 @@ footer {
     transform: translateY(40px);
 }
 
+.type-post-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+.type-post-video::after {
+    content: "\f04b";
+    font-family: FontAwesome;
+    font-size: 12px;
+}
+
 .thum-post:hover .infoTop,
 .thum-post:hover .infoBot {
     opacity: 1;
@@ -220,6 +211,10 @@ footer {
     -moz-transform: translateY(1px);
     -ms-transform: translateY(1px);
     transform: translateY(1px);
+}
+
+.thum-post:hover .type-post-video {
+    display: block;
 }
 
 .like-heart::after {
@@ -300,6 +295,10 @@ footer {
     justify-content: center
 }
 
+.modal video {
+    width: 100%;
+}
+
 .modal .large-img img {
     margin: auto;
 }
@@ -377,6 +376,7 @@ footer {
     color: #fff;
     border-radius: 3px;
     display: none;
+    z-index: 9999;
 }
 
 .modal .like-box ul li span::before {

@@ -4,8 +4,11 @@
     .row
       .col-sm-8
         #panel
-          input#address type="textbox" value="" placeholder="Enter a Address"
-          input onclick="getLatLngByAddress()" type="button" value="Find"
+          .input-group
+            input#address.form-control placeholder="Enter a Address" type="text"
+            span.input-group-btn
+              button.btn.btn-default onclick="getLatLngByAddress()" type="button"
+                i.fa.fa-search
 
         #map-canvas.map
       .col-sm-4

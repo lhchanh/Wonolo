@@ -11,7 +11,16 @@ RSpec.describe HomeController, :type => :controller do
       get :index
       expect(response).to be_success
     end
+  end
 
+  describe "GET get_post" do
+    it "should allow get post" do
+      get :get_post
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET get_media_like" do
     it "should allow get post" do
       get :get_post
       expect(response).to be_success

@@ -70,6 +70,7 @@ updateLatLng = (lat, lng)->
     if mediaID
       setPrevNextArrowID(mediaID)
       showModalDetail(mediaID)
+      viewAllUsersLike()
 
   changePostDetail()
   return
@@ -100,7 +101,6 @@ getPostByMediaID = (mediaID) ->
     cache: false
     type: 'GET'
     success: (respondData) ->
-      console.log respondData
       updateDetailData(respondData)
       formatTime()
       $('.loading').hide()
@@ -165,9 +165,30 @@ updateDetailData = (respondData)->
     $('.post-video .video').attr('src', respondData.videos.standard_resolution.url)
     $('.post-video').show().load()
 
+  $('#view_like_all').attr('media-id', respondData.id)
+
 changePostDetail = ->
   $('#prev-post-arrow, #next-post-arrow').on 'click', ->
     mediaID = $(this).attr('media-id')
     if mediaID
       setPrevNextArrowID(mediaID)
       getPostByMediaID(mediaID)
+
+
+@viewAllUsersLike = ->
+  $('#view_like_all').on 'click', ->
+    # mediaID = $(this).attr('media-id')
+    # getUserLike(mediaID)
+    return
+
+getUserLike = (mediaID) ->
+  $.ajax
+    url: Routes.get_media_like_path({media_id: mediaID})
+    dataType: 'json'
+    cache: false
+    type: 'GET'
+    success: (respondData) ->
+      console.log respondData
+      return
+    error: (error)->
+      return
