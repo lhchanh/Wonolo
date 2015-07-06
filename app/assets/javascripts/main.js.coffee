@@ -76,7 +76,6 @@ updateLatLng = (lat, lng)->
     if mediaID
       setPrevNextArrowID(mediaID)
       showModalDetail(mediaID)
-      viewAllUsersLike()
 
   changePostDetail()
   return
@@ -171,21 +170,12 @@ updateDetailData = (respondData)->
     $('.post-video .video').attr('src', respondData.videos.standard_resolution.url)
     $('.post-video').show().load()
 
-  $('#view_like_all').attr('media-id', respondData.id)
-
 changePostDetail = ->
   $('#prev-post-arrow, #next-post-arrow').on 'click', ->
     mediaID = $(this).attr('media-id')
     if mediaID
       setPrevNextArrowID(mediaID)
       getPostByMediaID(mediaID)
-
-
-@viewAllUsersLike = ->
-  $('#view_like_all').on 'click', ->
-    mediaID = $(this).attr('media-id')
-    getUserLike(mediaID)
-    return
 
 getUserLike = (mediaID) ->
   $.ajax
