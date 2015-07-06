@@ -10,12 +10,12 @@ class InstagramService < BaseService
           distance = ''
           while !distance.is_a? Numeric
             begin
-              sleep 0.25
+              sleep 2
               distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
             rescue
               # Fixed issue Usage Limits for Google Geocoding API
               # 5 requests per second.
-              sleep 0.5
+              sleep 5
               distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}").to_f
             end
           end
