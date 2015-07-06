@@ -7,13 +7,17 @@ class InstagramService < BaseService
     instagrams = if lat && lng
       instagrams = @client.media_search(lat,lng, {distance: distance})
       instagrams = instagrams.each do |e|
-            begin
-              distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
-            rescue
-              # Fixed issue Usage Limits for Google Geocoding API
-              # 5 requests per second.
-              sleep 5
-              distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
+            distance = ''
+            while !distance.is_a? Numeric
+              begin
+                sleep 1
+                distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
+              rescue
+                # Fixed issue Usage Limits for Google Geocoding API
+                # 5 requests per second.
+                sleep 2
+                distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}").to_f
+              end
             end
             e.distance = distance
           end
