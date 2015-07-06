@@ -11,6 +11,7 @@
         .infoBot
           span.pull-left.comment= instagram.comments.count
           span.pull-right.like-heart= instagram.likes.count
+        .type-post id="type-post-#{instagram.type}"
 
 .clearfix
 = paginate instagrams, remote: true

@@ -138,7 +138,6 @@ appendComments = (element, data)->
   element.append(html)
 
 updateDetailData = (respondData)->
-  $('.img_feed_post').attr("src", respondData.images.standard_resolution.url)
   $('.img_poster').attr("src", respondData.user.profile_picture)
   $('.full_name_poster').attr("href", respondData.link)
   $('.full_name_poster span.full_name').html(respondData.user.full_name)
@@ -156,6 +155,15 @@ updateDetailData = (respondData)->
     appendComments($('.comment_list'), data)
   else
     $('.comment_list').html('')
+
+  if respondData.type is 'image'
+    $('.post-video').hide()
+    $('.img_feed_post').attr("src", respondData.images.standard_resolution.url)
+    $('.large-img').show()
+  else
+    $('.large-img').hide()
+    $('.post-video .video').attr('src', respondData.videos.standard_resolution.url)
+    $('.post-video').show().load()
 
 changePostDetail = ->
   $('#prev-post-arrow, #next-post-arrow').on 'click', ->
