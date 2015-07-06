@@ -4,35 +4,35 @@ class InstagramService < BaseService
     lat = params_search[:lat]
     lng = params_search[:lng]
     distance = params_search[:radius].to_i*1000 || RADIUS
-    instagrams = if lat && lng
-      instagrams = @client.media_search(lat,lng, {distance: distance})
-      instagrams = instagrams.each do |e|
-            distance = ''
-            while !distance.is_a? Numeric
-              begin
-                sleep 0.25
-                distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
-              rescue
-                # Fixed issue Usage Limits for Google Geocoding API
-                # 5 requests per second.
-                sleep 0.5
-                distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}").to_f
-              end
+    return [] unless (lat && lng)
+    medias = @client.media_search(lat,lng, {distance: distance})
+    medias = medias.each do |e|
+          distance = ''
+          while !distance.is_a? Numeric
+            begin
+              sleep 0.25
+              distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}")
+            rescue
+              # Fixed issue Usage Limits for Google Geocoding API
+              # 5 requests per second.
+              sleep 0.5
+              distance = Geocoder::Calculations.bearing_between("#{e.location.latitude}, #{e.location.longitude}", "#{lat}, #{lng}").to_f
             end
-            e.distance = distance
           end
-          .sort_by do |e|
-            e.distance
-          end
-      instagrams = Kaminari.paginate_array(instagrams).page(params_search[:page]).per(PER_PAGE)
-    else
-      []
-    end
-    instagrams
+          e.distance = distance
+        end
+        .sort_by do |e|
+          e.distance
+        end
+    Kaminari.paginate_array(medias).page(params_search[:page]).per(PER_PAGE)
   end
 
   def get_post media_id
-    @client.media_item(media_id) if media_id
+    return nil unless media_id
+    data = @client.media_item(media_id)
+    data.comments.data = get_media_comments(media_id)
+    data.likes.data = get_media_likes(media_id)
+    data
   end
 
   [:likes, :comments].each do |sym|
