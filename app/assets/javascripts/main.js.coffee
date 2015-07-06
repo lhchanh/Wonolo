@@ -1,6 +1,7 @@
 geocoder = null
 map = null
 marker = null
+_this = @
 
 @initializeGoogleMaps = ->
   geocoder = new google.maps.Geocoder()
@@ -66,6 +67,10 @@ updateLatLng = (lat, lng)->
     if mediaID
       getPostByMediaID(mediaID)
   return
+
+@bindAutocompleteLocation = ->
+  $('#address').geocomplete().bind 'geocode:result', (event, result) ->
+    _this.getLatLngByAddress()
 
 getPostByMediaID = (mediaID) ->
   $('#feed-post').modal('show')
