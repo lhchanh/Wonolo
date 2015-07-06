@@ -15,6 +15,7 @@ gem 'instagram', '~> 1.1.5'
 gem 'js-routes', '~> 1.0.0'
 gem 'kaminari', '~> 0.16.3'
 gem 'geocoder'
+gem 'geokit', '~> 1.9.0'
 
 group :development, :test do
   gem 'byebug'
