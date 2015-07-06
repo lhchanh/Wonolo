@@ -59,8 +59,7 @@ updateLatLng = (lat, lng)->
   return
 
 @triggerModal = ->
-  $('.box-post .img-thumbnail').on 'click', ->
-    clearDetailData()
+  $('body').on 'click', '.box-post .img-thumbnail', ->
     $('.wrap-feed-detail').hide()
     $('.loading').show()
     mediaID = $(this).parent('.thum-post').parent('.box-post').attr('media-id')
@@ -70,14 +69,14 @@ updateLatLng = (lat, lng)->
 
 getPostByMediaID = (mediaID) ->
   $('#feed-post').modal('show')
-  $('#feed-post').off 'shown.bs.modal'
-  $('#feed-post').on 'shown.bs.modal', ->
+  $('#feed-post').off('shown.bs.modal').on 'shown.bs.modal', ->
     $.ajax
       url: Routes.get_post_path({media_id: mediaID})
       dataType: 'json'
       cache: false
       type: 'GET'
       success: (respondData) ->
+        console.log respondData
         updateDetailData(respondData)
         formatTime()
         $('.loading').hide()
@@ -133,11 +132,3 @@ updateDetailData = (respondData)->
     appendComments($('.comment_list'), data)
   else
     $('.comment_list').html('')
-
-clearDetailData = ->
-  $('.full_name_poster').attr("href", '')
-  $('.full_name_poster span.full_name').html('')
-  $('.count_like').html('')
-  $('.count_comment').html('')
-  $('.like_user').html('')
-  $('.comment_list').html('')
