@@ -21,8 +21,12 @@ class InstagramService < BaseService
   end
 
   def get_post media_id
-    post = nil
-    post = @client.media_item(media_id) if media_id
+    @client.media_item(media_id) if media_id
   end
 
+  [:likes, :comments].each do |sym|
+    define_method("get_media_#{sym.to_s}") do |media_id|
+      media_id ? @client.send("media_#{sym.to_s}", media_id) : []
+    end
+  end
 end
