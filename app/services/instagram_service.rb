@@ -6,6 +6,9 @@ class InstagramService < BaseService
     distance = params_search[:radius].to_i*1000 || RADIUS
     instagrams = if lat && lng
       instagrams = @client.media_search(lat,lng, {distance: distance})
+      instagrams = instagrams.sort_by do |instagram|
+        Geocoder::Calculations.bearing_between([instagram.location.latitude, instagram.location.longitude], [lat, lng])
+      end
       instagrams = Kaminari.paginate_array(instagrams).page(params_search[:page]).per(PER_PAGE)
     else
       []

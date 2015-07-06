@@ -14,6 +14,7 @@ gem 'twitter-bootstrap-rails', '~> 3.2.0'
 gem 'instagram', '~> 1.1.5'
 gem 'js-routes', '~> 1.0.0'
 gem 'kaminari', '~> 0.16.3'
+gem 'geocoder'
 
 group :development, :test do
   gem 'byebug'
