@@ -60,14 +60,15 @@ updateLatLng = (lat, lng)->
 
 @triggerModal = ->
   $('.box-post .img-thumbnail').on 'click', ->
+    clearDetailData()
+    $('.wrap-feed-detail').hide()
+    $('.loading').show()
     mediaID = $(this).parent('.thum-post').parent('.box-post').attr('media-id')
     if mediaID
       getPostByMediaID(mediaID)
   return
 
 getPostByMediaID = (mediaID) ->
-  $('.wrap-feed-detail').hide()
-  $('.loading').show()
   $('#feed-post').modal('show')
   $('#feed-post').on 'shown.bs.modal', ->
     $.ajax
@@ -76,30 +77,16 @@ getPostByMediaID = (mediaID) ->
       cache: false
       type: 'GET'
       success: (respondData) ->
-        $('.img_feed_post').attr("src", respondData.images.standard_resolution.url)
-        $('.img_poster').attr("src", respondData.user.profile_picture)
-        $('.full_name_poster').attr("href", respondData.link)
-        $('.full_name_poster span.full_name').html(respondData.user.full_name)
-        $('.created_time').attr("datetime", respondData.created_time)
-        $('.count_like').html(respondData.likes.count)
-        $('.count_comment').html(respondData.comments.count)
-
-        if respondData.likes.count > 0
-          dataLike = respondData.likes.data
-          appendLikeUser($('.like_user'), dataLike)
-        else
-          $('.like_user').html('')
-
-        if respondData.comments.count > 0
-          data = respondData.comments.data
-          appendComments($('.comment_list'), data)
-        else
-          $('.comment_list').html('')
+        updateDetailData(respondData)
         formatTime()
         $('.loading').hide()
         $('.wrap-feed-detail').show()
+        return
+
         console.log respondData
       error: (error)->
+        $('.loading').show()
+        $('.wrap-feed-detail').hide()
         console.log error
 
 appendLikeUser = (element, data)->
@@ -128,3 +115,31 @@ appendComments = (element, data)->
     i++
   html = html + '</ul>'
   element.append(html)
+
+updateDetailData = (respondData)->
+  $('.img_feed_post').attr("src", respondData.images.standard_resolution.url)
+  $('.img_poster').attr("src", respondData.user.profile_picture)
+  $('.full_name_poster').attr("href", respondData.link)
+  $('.full_name_poster span.full_name').html(respondData.user.full_name)
+  $('.created_time').attr("datetime", respondData.created_time)
+  $('.count_like').html(respondData.likes.count)
+  $('.count_comment').html(respondData.comments.count)
+  if respondData.likes.count > 0
+    dataLike = respondData.likes.data
+    appendLikeUser($('.like_user'), dataLike)
+  else
+    $('.like_user').html('')
+
+  if respondData.comments.count > 0
+    data = respondData.comments.data
+    appendComments($('.comment_list'), data)
+  else
+    $('.comment_list').html('')
+
+clearDetailData = ->
+  $('.full_name_poster').attr("href", '')
+  $('.full_name_poster span.full_name').html('')
+  $('.count_like').html('')
+  $('.count_comment').html('')
+  $('.like_user').html('')
+  $('.comment_list').html('')

@@ -1,32 +1,41 @@
 #feed-post.modal.fade aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-  .modal-dialog role="document"
+  .modal-dialog.modal-lg role="document"
     .wrap-feed-detail
       .modal-header
         button.close aria-label="Close" data-dismiss="modal" type="button"
           span aria-hidden="true"  &times;
       .modal-body
         .row
-          .col-md-2
-            span Prev
-          .col-md-8
-            img.img_feed_post src=""
+          .col-xs-2
+            span.prev
+              i.fa.fa-chevron-left
+          .col-xs-8
+            .large-img
+              img.img_feed_post.img-responsive src=""
             .poster-info
               img.img-circle.img_poster src=""
               a.full_name_poster href="#"
                 span.full_name
               .created_time.time datetime=""
             .map-feed-detail
-            .like-box
-              h3
-                span.count_like
-                span Likes
-                span.view_like_all View All
+          .col-xs-2
+            span.next
+              i.fa.fa-chevron-right
+        .row
+          .col-sm-8.col-sm-push-2
+            .like-box.clearfix
+              header.clearfix
+                .pull-left
+                  span.count_like
+                  span  Likes
+                .pull-right
+                  span.view_like_all View All
+
               list.like_user
-            .comment
-              h3
+            .list-comment
+              header.clearfix
                 span.count_comment
-                span Comments
+                span  Comments
               list.comment_list
-          .col-md-2
-            span Next
-    .loading Loading ...
+
+    .loading Please Wait ...
