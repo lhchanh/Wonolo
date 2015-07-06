@@ -10,7 +10,7 @@ class InstagramService < BaseService
           .sort_by do |e|
             # Fixed issue Usage Limits for Google Geocoding API
             # 5 requests per second.
-            sleep  0.06
+            sleep  0.2
             e.distance
           end
       instagrams = Kaminari.paginate_array(instagrams).page(params_search[:page]).per(PER_PAGE)
