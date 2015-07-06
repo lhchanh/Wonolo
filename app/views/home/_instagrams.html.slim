@@ -1,5 +1,5 @@
 - instagrams.each do |instagram|
-  .col-md-3
+  .col-md-3.media-wrap-box media-id-wrap-box="#{instagram.id}"
     .box-post media-id="#{instagram.id}"
       = link_to instagram_profile(instagram.user.username), target: '_blank' do
         .user-profile

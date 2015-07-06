@@ -2,6 +2,9 @@ geocoder = null
 map = null
 marker = null
 _this = @
+@bindAutocompleteLocation = ->
+  $('#address').geocomplete().bind 'geocode:result', (event, result) ->
+    _this.getLatLngByAddress()
 
 @initializeGoogleMaps = ->
   geocoder = new google.maps.Geocoder()
@@ -65,31 +68,47 @@ updateLatLng = (lat, lng)->
     $('.loading').show()
     mediaID = $(this).parent('.thum-post').parent('.box-post').attr('media-id')
     if mediaID
-      getPostByMediaID(mediaID)
+      setPrevNextArrowID(mediaID)
+      showModalDetail(mediaID)
+
+  changePostDetail()
   return
 
-@bindAutocompleteLocation = ->
-  $('#address').geocomplete().bind 'geocode:result', (event, result) ->
-    _this.getLatLngByAddress()
+setPrevNextArrowID = (mediaID)->
+  prevSelector = $( "div[media-id-wrap-box='" + mediaID + "']" ).prev()
+  nextSelector = $( "div[media-id-wrap-box='" + mediaID + "']" ).next()
+  lastSelector = $('.media-wrap-box').last()
+  firstSelector = $('.media-wrap-box').first()
 
-getPostByMediaID = (mediaID) ->
+  prevMediaID = prevSelector.attr('media-id-wrap-box')
+  nextMediaID = nextSelector.attr('media-id-wrap-box')
+  lastMediaID = lastSelector.attr('media-id-wrap-box')
+  firstMediaID = firstSelector.attr('media-id-wrap-box')
+
+  $('#prev-post-arrow').attr('media-id', prevMediaID || lastMediaID)
+  $('#next-post-arrow').attr('media-id', nextMediaID || firstMediaID)
+
+showModalDetail = (mediaID)->
   $('#feed-post').modal('show')
   $('#feed-post').off('shown.bs.modal').on 'shown.bs.modal', ->
-    $.ajax
-      url: Routes.get_post_path({media_id: mediaID})
-      dataType: 'json'
-      cache: false
-      type: 'GET'
-      success: (respondData) ->
-        console.log respondData
-        updateDetailData(respondData)
-        formatTime()
-        $('.loading').hide()
-        $('.wrap-feed-detail').show()
-        return
-      error: (error)->
-        $('.loading').show()
-        $('.wrap-feed-detail').hide()
+    getPostByMediaID(mediaID)
+
+getPostByMediaID = (mediaID) ->
+  $.ajax
+    url: Routes.get_post_path({media_id: mediaID})
+    dataType: 'json'
+    cache: false
+    type: 'GET'
+    success: (respondData) ->
+      console.log respondData
+      updateDetailData(respondData)
+      formatTime()
+      $('.loading').hide()
+      $('.wrap-feed-detail').show()
+      return
+    error: (error)->
+      $('.loading').show()
+      $('.wrap-feed-detail').hide()
 
 appendLikeUser = (element, data)->
   element.html('')
@@ -137,3 +156,10 @@ updateDetailData = (respondData)->
     appendComments($('.comment_list'), data)
   else
     $('.comment_list').html('')
+
+changePostDetail = ->
+  $('#prev-post-arrow, #next-post-arrow').on 'click', ->
+    mediaID = $(this).attr('media-id')
+    if mediaID
+      setPrevNextArrowID(mediaID)
+      getPostByMediaID(mediaID)
