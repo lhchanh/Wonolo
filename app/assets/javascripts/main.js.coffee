@@ -53,9 +53,9 @@ _this = @
 
     mk.setIcon({
         url: src,
-        scaledSize: new google.maps.Size(50, 50),
+        scaledSize: new google.maps.Size(60, 60),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(50/2, 50/2)
+        anchor: new google.maps.Point(60/2, 60/2)
       })
 
   return
