@@ -50,7 +50,13 @@ _this = @
       position: latLngPhoto
       map: map
       title: poster
-      icon: src
+
+    mk.setIcon({
+        url: src,
+        scaledSize: new google.maps.Size(50, 50),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(50/2, 50/2)
+      })
 
   return
 
