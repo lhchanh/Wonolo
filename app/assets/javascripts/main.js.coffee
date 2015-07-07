@@ -2,6 +2,7 @@ geocoder = null
 map = null
 marker = null
 _this = @
+markersPhoto = []
 @bindAutocompleteLocation = ->
   $('#address').geocomplete().bind 'geocode:result', (event, result) ->
     _this.getLatLngByAddress()
@@ -38,6 +39,7 @@ _this = @
   marker.setPosition(latlng)
 
 @displayAllPhotoOnMap = ->
+  deleteMarkers()
   $('.media-wrap-box').each (i, e) ->
     lat = $(e).attr('data-lat')
     lng = $(e).attr('data-lng')
@@ -58,6 +60,16 @@ _this = @
         anchor: new google.maps.Point(60/2, 60/2)
       })
 
+    markersPhoto.push(mk)
+
+  return
+
+@deleteMarkers = ->
+  i = 0
+  while i < markersPhoto.length
+    markersPhoto[i].setMap null
+    i++
+  markersPhoto = []
   return
 
 @getLatLngByAddress = ->
