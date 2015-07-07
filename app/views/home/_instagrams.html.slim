@@ -1,5 +1,5 @@
 - instagrams.each do |instagram|
-  .col-md-3.media-wrap-box media-id-wrap-box="#{instagram.id}"
+  .col-md-3.media-wrap-box media-id-wrap-box="#{instagram.id}" data-lat="#{instagram.location.latitude}" data-lng="#{instagram.location.longitude}" thumbnail-src="#{instagram.images.thumbnail.url}" data-poster="#{instagram.user.username}"
     .box-post media-id="#{instagram.id}"
       = link_to instagram_profile(instagram.user.username), target: '_blank' do
         .user-profile
@@ -12,7 +12,6 @@
           span.pull-left.comment= instagram.comments[:count]
           span.pull-right.like-heart= instagram.likes[:count]
           .distance.distance-post distance="#{instagram.distance}"
-
         .type-post class="type-post-#{instagram.type}"
 
 

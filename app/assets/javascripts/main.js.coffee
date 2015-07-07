@@ -11,7 +11,7 @@ _this = @
   latlng = new google.maps.LatLng(10.8230989, 106.6296638)
   mapOptions =
     center: latlng
-    zoom: 8
+    zoom: 15
 
   mapDiv = document.getElementById('map-canvas')
   map = new (google.maps.Map)(mapDiv, mapOptions)
@@ -37,6 +37,22 @@ _this = @
   map.panTo(latlng)
   marker.setPosition(latlng)
 
+@displayAllPhotoOnMap = ->
+  $('.media-wrap-box').each (i, e) ->
+    lat = $(e).attr('data-lat')
+    lng = $(e).attr('data-lng')
+    src = $(e).attr('thumbnail-src')
+    poster = $(e).attr('data-poster')
+
+    latLngPhoto = new google.maps.LatLng(lat, lng)
+
+    mk = new (google.maps.Marker)
+      position: latLngPhoto
+      map: map
+      title: poster
+      icon: src
+
+  return
 
 @getLatLngByAddress = ->
   address = document.getElementById('address').value
