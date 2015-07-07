@@ -30,6 +30,14 @@ _this = @
     return
   return
 
+@updateMarker = (lat, lng)->
+  lat = $('#latitude').val()
+  lng = $('#longitude').val()
+  latlng = new google.maps.LatLng(lat, lng)
+  map.panTo(latlng)
+  marker.setPosition(latlng)
+
+
 @getLatLngByAddress = ->
   address = document.getElementById('address').value
   return unless address
